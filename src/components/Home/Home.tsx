@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
-import { useBlogPostData } from './Query'
+import { useBlogPostData } from './Query';
+import { useBannerData } from './Query2';
+import { useCarouselData } from './Query3';
 
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
 
@@ -23,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
         height: "550px",
         marginTop: theme.spacing(2.5),
         position: "relative",
-        backgroundImage: "url(/images/banner/banner.webp)",
+        // backgroundImage: "url(/images/banner/banner.webp)",
+        backgroundImage: (props: { banSrc: string }) => `url(${props.banSrc})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "100% 100%",
@@ -108,9 +111,14 @@ const useStyles = makeStyles((theme) => ({
 
 const index = () => {
 
-    const classes = useStyles();
     const [category, setCategory] = useState("TRAVEL");
     const data = useBlogPostData();
+    const banner = useBannerData();
+    const carousel = useCarouselData();
+    const banSrc = banner.allContentfulBanner.nodes[0].bannerImg.fluid.src;
+    const classes = useStyles({banSrc});
+
+
 
     const fashionPosts = data.allContentfulBlogPost.nodes.
         filter((post) => (post.blogPostCategory.toUpperCase() === "FASHION")).length;
@@ -171,7 +179,7 @@ const index = () => {
             >
                 <div style={{ padding: "0 10px" }}>
                     <div>
-                        <img src="/images/carousel/image1.webp" alt="" width="100%" />
+                        <img src={carousel.allContentfulCarousel.nodes[2].carouselImg.fluid.src} alt="" width="100%" />
                     </div>
                     <div className={classes.blogSlideContent}>
                         <Link to="/" className={classes.blogSlideLabel}>Travel</Link>
@@ -182,7 +190,7 @@ const index = () => {
 
                 <div style={{ padding: "0 10px" }}>
                     <div >
-                        <img src="/images/carousel/image2.webp" alt="" width="100%" />
+                        <img src={carousel.allContentfulCarousel.nodes[1].carouselImg.fluid.src} alt="" width="100%" />
                     </div>
 
                     <div className={classes.blogSlideContent}>
@@ -196,7 +204,7 @@ const index = () => {
                 </div >
                 <div style={{ padding: "0 10px" }}>
                     <div>
-                        <img src="/images/carousel/image3.jpg" alt="" width="100%" />
+                        <img src={carousel.allContentfulCarousel.nodes[0].carouselImg.fluid.src} alt="" width="100%" />
                     </div>
                     <div className={classes.blogSlideContent}>
                         <Link to="/" className={classes.blogSlideLabel}>Technology</Link>
@@ -216,7 +224,8 @@ const index = () => {
                                     <BlogPost
                                         key={filteredPost.blogPostId}
                                         id={filteredPost.blogPostId}
-                                        imgName={filteredPost.blogPostImage.file.fileName}
+                                        src={filteredPost.blogPostImage.fluid.src}
+                                        title={filteredPost.blogPostImage.title}
                                         tag={filteredPost.blogPostTag}
                                         heading={filteredPost.blogPostHeading}
                                         comments={filteredPost.blogPostComments}

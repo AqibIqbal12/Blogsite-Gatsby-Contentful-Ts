@@ -36,7 +36,7 @@ const BlogDetails = ({ blogDetails }) => {
         <Container className={classes.container}>
             <div className={classes.blogDetailsWrapper}>
                 <div className={classes.imgWrapper}>
-                    <img src={`/images/blog_post/${blogDetails.blogPostImage.file.fileName}`} alt="" width="100%" height="100%" style={{}}/>
+                    <img src={blogDetails.blogPostImage.fluid.src} alt="" width="100%" height="100%" style={{}}/>
                 </div>
                 <div style={{width:"80%", marginTop:"7px", wordWrap:"break-word"}}>
                     <h1>{blogDetails.blogPostHeading}</h1>

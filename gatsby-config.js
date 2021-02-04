@@ -1,7 +1,11 @@
 // module.exports = {
 //   plugins: ["gatsby-plugin-typescript"],
 // };
+
+
 require('dotenv').config();
+// typeof window !== `undefined` ? require('dotenv').config() : null
+
 module.exports = {
   plugins: [
     {
@@ -16,8 +20,8 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: `kdm0zyjw5uus`,
-        accessToken: "EsPnefnsEZD9WfxTi4LM7FW_vWlu_dZehaOGWpqD1FE",
+        spaceId: process.env.spaceId,
+        accessToken: process.env.accessToken
       },
     },
     {
@@ -34,12 +38,6 @@ module.exports = {
 
         }
       }
-    },
-    {
-      resolve: `gatsby-plugin-env-variables`,
-      options: {
-        // allowList: ["MY_VAR", "MY_OTHER_VAR"]
-      },
     }
   ],
 }

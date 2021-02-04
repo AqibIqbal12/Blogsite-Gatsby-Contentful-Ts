@@ -95,7 +95,8 @@ const useStyles = makeStyles((theme) => ({
 
 type BlogPostProps = {
     id: number,
-    imgName: string,
+    src: string,
+    title: string,
     tag: string,
     heading: string,
     comments: number,
@@ -103,7 +104,7 @@ type BlogPostProps = {
     desc: string
 }
 
-const BlogPost: FC<BlogPostProps> = ({ id, imgName, tag, heading, comments, date, desc }) => {
+const BlogPost: FC<BlogPostProps> = ({ id, src, title, tag, heading, comments, date, desc }) => {
 
     const classes = useStyles();
     const [openPopup, setOpenPopup] = useState(false)
@@ -127,7 +128,7 @@ const BlogPost: FC<BlogPostProps> = ({ id, imgName, tag, heading, comments, date
             }
             <div className={classes.blogPostWrapper}>
                 <div className={classes.thumb}>
-                    <img src={`/images/blog_post/${imgName}`} width="100%" height="100%" alt="" style={{}} />
+                    <img src={src} title={title} width="100%" height="100%" alt="" style={{}} />
                     <ul>
                         <li>
                             <Link

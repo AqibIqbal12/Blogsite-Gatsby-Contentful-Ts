@@ -1,5 +1,5 @@
 var path = require('path');
-require('dotenv').config()
+// require('dotenv').config();
 
 
 
@@ -16,9 +16,10 @@ exports.createPages = async ({actions, graphql}) => {
               blogPostComments
               blogPostDate(formatString: "YYYY/MM/DD")
               blogPostImage {
-                file {
-                  fileName
+                fluid {
+                  src
                 }
+                title
               }
               blogPostDesc {
                 raw
@@ -40,3 +41,18 @@ exports.createPages = async ({actions, graphql}) => {
         })
     })
 }
+// gatsby-node.js
+// exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+//   if (stage === "build-html") {
+//     actions.setWebpackConfig({
+//       module: {
+//         rules: [
+//           {
+//             test: /@firebase/,
+//             use: loaders.null(),
+//           },
+//         ],
+//       },
+//     })
+//   }
+// }

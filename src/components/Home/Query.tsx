@@ -8,9 +8,11 @@ export const useBlogPostData = () => {
         nodes {
           blogPostId
           blogPostImage {
-            file {
-                fileName
-              }
+            
+            fluid {
+              src
+            }
+            title
         }
           blogPostTag
           blogPostHeading

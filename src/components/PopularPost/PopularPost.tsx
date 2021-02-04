@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 
+import { usePopularPostData } from './Query';
+
 import { Link } from 'gatsby';
 
 const useStyles = makeStyles((theme) => ({
@@ -68,13 +70,14 @@ const useStyles = makeStyles((theme) => ({
 
 const PopularPost = () => {
     const classes = useStyles();
+    const data = usePopularPostData();
     return (
         <div className={classes.popularPost}>
             <h4>Popular Posts</h4>
             <div className={classes.popularPostList}>
                 <div className={classes.popularPostListWrapper}>
                     <div className={classes.thumb}>
-                        <img src="/images/popular_post/thumb1.png" alt="" width="100%"/>
+                        <img src={data.allContentfulPopularPost.nodes[0].popularPostImg.fluid.src} alt="" width="100%"/>
                         <ul className={classes.thumbInfo}>
                             <li>
                                 <Link to="/">Adam Colinge</Link>
@@ -92,7 +95,7 @@ const PopularPost = () => {
                 </div>
                 <div className={classes.popularPostListWrapper}>
                     <div className={classes.thumb}>
-                        <img src="/images/popular_post/thumb2.png" alt="" width="100%"/>
+                        <img src={data.allContentfulPopularPost.nodes[1].popularPostImg.fluid.src} alt="" width="100%"/>
                         <ul className={classes.thumbInfo}>
                             <li>
                                 <Link to="/">Adam Colinge</Link>
@@ -110,7 +113,7 @@ const PopularPost = () => {
                 </div>
                 <div className={classes.popularPostListWrapper}>
                     <div className={classes.thumb}>
-                        <img src="/images/popular_post/thumb3.png" alt="" width="100%"/>
+                        <img src={data.allContentfulPopularPost.nodes[2].popularPostImg.fluid.src} alt="" width="100%"/>
                         <ul className={classes.thumbInfo}>
                             <li>
                                 <Link to="/">Adam Colinge</Link>

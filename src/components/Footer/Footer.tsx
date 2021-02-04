@@ -5,6 +5,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 
+import { useInstagramFeedData } from './Query';
 
 const useStyles = makeStyles((theme) => ({
     footerContainer: {
@@ -70,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Footer = () => {
+    const data = useInstagramFeedData();
     const classes = useStyles();
     return (
         <footer className={classes.footerContainer}>
@@ -112,12 +114,11 @@ const Footer = () => {
                                 Instagram Feed
                             </Typography>
                             <ul className={classes.ul}>
-                                <li><img src="/images/instagram/i1.jpg" alt="" /></li>
-                                <li><img src="/images/instagram/i2.jpg" alt="" /></li>
-                                <li><img src="/images/instagram/i3.jpg" alt="" /></li>
-                                <li><img src="/images/instagram/i4.jpg" alt="" /></li>
-                                <li><img src="/images/instagram/i5.jpg" alt="" /></li>
-                                <li><img src="/images/instagram/i6.jpg" alt="" /></li>
+                            {
+                                data.allContentfulInstagramFeed.nodes.map((elem, i) => (
+                                    <li key={i}><img src={elem.instagramFeedImg.fluid.src} alt="" /></li>
+                                ))
+                            }
                             </ul>
                         </div>
                     </Grid>
